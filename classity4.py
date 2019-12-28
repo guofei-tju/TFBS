@@ -7,6 +7,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import classification_report
 from sklearn import tree
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import GradientBoostingClassifier
 
 #读取特征文件,使用pandas读取特征文件
 def read_feature(filename):
@@ -45,10 +46,11 @@ if __name__=='__main__':
     #model1 = RandomForestClassifier(random_state=14, criterion='gini', max_depth=15, n_estimators=90)
     #两个最优特征组合的最优参数
     model1 = RandomForestClassifier(random_state=14, criterion='gini', max_depth=15, n_estimators=120)
+    model2 = GradientBoostingClassifier(n_estimators=60, learning_rate=0.1, max_depth=5, random_state=10)
     model3 = tree.DecisionTreeClassifier(criterion='entropy', max_depth=157, splitter='best')
     model4 = KNeighborsClassifier(algorithm='brute', n_neighbors=2, weights='distance')
-    models = [model1, model3, model4]
-    model_name = ['RF', 'DTree', 'KNN']
+    models = [model1,model2, model3, model4]
+    model_name = ['RF', 'GBDT','DTree', 'KNN']
     #model_name = ['RF']
     for index in range(len(model_name)):
         sum=0
